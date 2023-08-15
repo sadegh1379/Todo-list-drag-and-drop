@@ -1,13 +1,8 @@
 export const reducer = (state, action) => {
   switch (action.type) {
-    case "COMPLETE":
-      return state.map((todo) => {
-        if (todo.id === action.id) {
-          return { ...todo, complete: !todo.complete };
-        } else {
-          return todo;
-        }
-      });
+    case "NEW_BOARD":
+      console.log('action new board', action);
+      return action.newBoard;
     default:
       return state;
   }

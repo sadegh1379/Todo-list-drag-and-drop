@@ -13,7 +13,7 @@ function Column({ id, tasks, index, title, bgColor, titleColor, icon }) {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Droppable droppableId={index.toString()} type="card">
+          <Droppable droppableId={id} type="card">
             {/* tasks */}
             {(provided, snapshot) => (
               <div

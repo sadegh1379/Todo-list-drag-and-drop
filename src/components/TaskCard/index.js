@@ -16,14 +16,14 @@ function TaskCard({
       ref={innerRef}
       className="bg-white group rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center "
     >
-      <div class="flex items-center justify-between w-full gap-1 relative">
+      <div className="flex items-center justify-between w-full gap-1 relative">
         <input
           id="green-checkbox"
           type="checkbox"
-          class="w-4 accent-dark-pink outline-none h-4 rounded focus:ring-dark-red focus:ring-0"
+          className="w-4 accent-dark-pink outline-none h-4 rounded focus:ring-dark-red focus:ring-0"
         />
-        <label for="green-checkbox" class="text-sm flex-1 font-medium ml-1">
-          Green adaw awda adwda awdawdawDoing
+        <label htmlFor="green-checkbox" className="text-sm flex-1 font-medium ml-1">
+          {task.title}
         </label>
         <button className="absolute right-[1px] hidden group-hover:flex ">
           <svg
