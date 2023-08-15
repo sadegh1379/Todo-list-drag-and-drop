@@ -9,6 +9,7 @@ const initialBoards = [
     title: "Todo",
     bgColor: "bg-light-red",
     titleColor: "text-dark-red",
+    icon: '',
     tasks: [
       {
         id: '20',
@@ -33,6 +34,7 @@ const initialBoards = [
     title: "Doing",
     bgColor: "bg-light-pink",
     titleColor: "text-dark-pink",
+    icon: '💪',
     tasks: [
       {
         id: '23',
@@ -57,6 +59,7 @@ const initialBoards = [
     title: "Done",
     bgColor: "bg-light-green",
     titleColor: "text-dark-green",
+    icon: '🎉',
     tasks: [
       {
         id: '26',
@@ -87,7 +90,7 @@ function Board() {
       <Droppable droppableId="board" direction="horizontal" type="column">
         {(provided) => (
           <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto mt-10"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -100,6 +103,7 @@ function Board() {
                 key={board.id}
                 index={index}
                 tasks={board.tasks}
+                icon={board.icon}
               />
             ))}
           </div>

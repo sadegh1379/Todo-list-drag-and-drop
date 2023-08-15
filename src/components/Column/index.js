@@ -4,7 +4,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 import TaskCard from "../TaskCard";
 
-function Column({ id, tasks, index, title, bgColor, titleColor }) {
+function Column({ id, tasks, index, title, bgColor, titleColor, icon }) {
   return (
     <Draggable draggableId={`${id}`} index={index}>
       {(provided) => (
@@ -19,18 +19,18 @@ function Column({ id, tasks, index, title, bgColor, titleColor }) {
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`p-2 rounded-2xl shadow-sm 
+                className={`p-4 rounded-lg shadow-sm
               ${snapshot.isDraggingOver ? bgColor : bgColor}
 
               `}
               >
                 <h2 className="font-[600] text-[16px] flex justify-between">
-                  <span className={`${titleColor}`}>{title}</span>
-                  <span className={`${titleColor} opacity-30`}>
+                  <span className={`${titleColor}`}>{title} {icon}</span>
+                  <span className={`${titleColor} text-[13px] opacity-30`}>
                     {tasks.length} Tasks
                   </span>
                 </h2>
-                <div className="space-y-2">
+                <div className="space-y-3 my-3">
                   {tasks.map((task, index) => (
                     <Draggable
                       key={task.id}
