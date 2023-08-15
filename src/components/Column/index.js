@@ -1,5 +1,7 @@
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { AiOutlinePlus } from 'react-icons/ai';
+
 import TaskCard from "../TaskCard";
 
 function Column({ id, tasks, index, title, bgColor, titleColor }) {
@@ -12,6 +14,7 @@ function Column({ id, tasks, index, title, bgColor, titleColor }) {
           ref={provided.innerRef}
         >
           <Droppable droppableId={index.toString()} type="card">
+            {/* tasks */}
             {(provided, snapshot) => (
               <div
                 {...provided.droppableProps}
@@ -46,6 +49,15 @@ function Column({ id, tasks, index, title, bgColor, titleColor }) {
                       )}
                     </Draggable>
                   ))}
+                  {/* drag place holder */}
+                  {provided.placeholder}
+                  {/* add new task */}
+                  <div>
+                    <button className={`font-bold text-[13px] ${titleColor} opacity-60 flex items-center gap-2`}>
+                      <AiOutlinePlus size={20}/>
+                       New
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

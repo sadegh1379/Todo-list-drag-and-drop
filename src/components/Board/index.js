@@ -11,66 +11,66 @@ const initialBoards = [
     titleColor: "text-dark-red",
     tasks: [
       {
-        id: 1,
+        id: '20',
         title:
           "Start with meditation, exercise & breakfast for a productive day",
         status: "todo",
       },
       {
-        id: 2,
+        id: '21',
         title: "Read to learn something new every day",
         complete: "doing",
       },
       {
-        id: 3,
+        id: '22',
         title: "Read to learn something new every day",
         complete: "done",
       },
     ],
   },
   {
-    id: 2,
+    id: '2',
     title: "Doing",
     bgColor: "bg-light-pink",
     titleColor: "text-dark-pink",
     tasks: [
       {
-        id: 1,
+        id: '23',
         title:
           "Start with meditation, exercise & breakfast for a productive day",
         status: "todo",
       },
       {
-        id: 2,
+        id: '24',
         title: "Read to learn something new every day",
         complete: "doing",
       },
       {
-        id: 3,
+        id: '25',
         title: "Read to learn something new every day",
         complete: "done",
       },
     ],
   },
   {
-    id: 3,
+    id: '3',
     title: "Done",
     bgColor: "bg-light-green",
     titleColor: "text-dark-green",
     tasks: [
       {
-        id: 1,
+        id: '26',
         title:
           "Start with meditation, exercise & breakfast for a productive day",
         status: "todo",
       },
       {
-        id: 2,
+        id: '27',
         title: "Read to learn something new every day",
         complete: "doing",
       },
       {
-        id: 3,
+        id: '28',
         title: "Read to learn something new every day",
         complete: "done",
       },
