@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import reorder, { reorderQuoteMap } from "../../helpers/reorder";
 import useTaskHandler from "../../hooks/useTaskHandler";
 import { initialBoards } from "../../utils/Data";
 import Column from "../Column";
+import { reducer } from "../../reducer";
 
 function Board() {
-  const [boards, setBoards] = useState(initialBoards);
+  const [boards, dispatch] = useReducer(reducer, initialBoards);
+  const [boardss, setBoards] = useState(initialBoards);
   const [ordered, setOrdered] = useState(Object.keys(initialBoards));
   const { deleteTask, addTask, addMultiTask } = useTaskHandler(boards);
 
@@ -40,20 +42,34 @@ function Board() {
       source,
       destination,
     });
-
-    setBoards(data.quoteMap);
+    dispatch({
+      type: 'ADD_BOARD',
+      boards: data.quoteMap
+    })
   };
 
   const deleteTaskHandler = (boardId, taskId) => {
-    setBoards(deleteTask(boardId, taskId))
+    dispatch({
+      type: 'DELETE_TASK',
+      taskId,
+      boardId
+    })
   }
 
   const addTaskHandler = (boardId, title) => {
-    setBoards(addTask(boardId, title))
+    dispatch({
+      type: 'ADD_TASK',
+      title,
+      boardId
+    })
   };
 
   const addMultiTaskHandler = (boardId, tasks) =>{
-    setBoards(addMultiTask(boardId, tasks))
+    dispatch({
+      type: 'ADD_MULTI_TASK',
+      tasks,
+      boardId
+    })
   }
 
   return (
