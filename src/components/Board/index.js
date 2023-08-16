@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Column from "../Column";
-import reorder, { reorderQuoteMap } from "../../../helper/reorder";
+import reorder, { reorderQuoteMap } from "../../helper/reorder";
 import { initialBoards } from "../../utils/Data";
+import useDeleteTask from "../../hooks/useDeleteTask";
 
 function Board() {
   const [boards, setBoards] = useState(initialBoards);
   const [ordered, setOrdered] = useState(Object.keys(initialBoards));
+  const [deleteTask] = useDeleteTask();
 
   const handleDropEnd = (result) => {
     // dropped nowhere
@@ -42,6 +44,10 @@ function Board() {
     setBoards(data.quoteMap);
   };
 
+  const deleteTaskHandler = (boardId, taskId) => {
+    setBoards(deleteTask(boards, boardId, taskId))
+  }
+
   return (
     <DragDropContext onDragEnd={handleDropEnd}>
       <Droppable droppableId="board" direction="horizontal" type="COLUMN">
@@ -59,8 +65,10 @@ function Board() {
                 id={key}
                 key={boards[key].id}
                 index={index}
+                boardId={boards[key].id}
                 tasks={boards[key].tasks}
                 icon={boards[key].icon}
+                deleteTaskHandler={deleteTaskHandler}
               />
             ))}
           </div>

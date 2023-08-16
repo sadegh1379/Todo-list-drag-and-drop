@@ -4,7 +4,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 import TaskCard from "../TaskCard";
 
-function Column({ id, tasks, index, title, bgColor, titleColor, icon }) {
+function Column({ id, tasks, index, title, bgColor, titleColor, icon, deleteTaskHandler, boardId }) {
   return (
     <Draggable draggableId={`${id}`} index={index}>
       {(provided) => (
@@ -45,6 +45,8 @@ function Column({ id, tasks, index, title, bgColor, titleColor, icon }) {
                           innerRef={provided.innerRef}
                           draggableProps={provided.draggableProps}
                           dragHandleProps={provided.dragHandleProps}
+                          boardId={boardId}
+                          deleteTaskHandler={deleteTaskHandler}
                         />
                       )}
                     </Draggable>

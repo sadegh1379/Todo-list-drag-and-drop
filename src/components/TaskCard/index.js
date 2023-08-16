@@ -1,5 +1,4 @@
 import React from "react";
-import { CiCircleRemove } from "react-icons/ci";
 
 function TaskCard({
   task,
@@ -8,7 +7,10 @@ function TaskCard({
   innerRef,
   draggableProps,
   dragHandleProps,
+  deleteTaskHandler,
+  boardId
 }) {
+
   return (
     <div
       {...draggableProps}
@@ -22,10 +24,10 @@ function TaskCard({
           type="checkbox"
           className="w-4 accent-dark-pink outline-none h-4 rounded focus:ring-dark-red focus:ring-0"
         />
-        <label htmlFor="green-checkbox" className="text-sm flex-1 font-medium ml-1">
+        <label htmlFor="green-checkbox" className="text-sm flex-1 font-medium ml-1 mr-6">
           {task.title}
         </label>
-        <button className="absolute right-[1px] hidden group-hover:flex ">
+        <button onClick={() => deleteTaskHandler(boardId, id)} className="absolute right-[1px] hidden group-hover:flex ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
