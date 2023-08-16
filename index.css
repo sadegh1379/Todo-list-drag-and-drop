@@ -59,3 +59,9 @@
   height: 20px;
   width: 20px;
 }
+
+/* react-text-edit styles */
+.text-edit:hover{
+  background-color: transparent !important;
+  cursor: auto;
+}

@@ -1,13 +1,14 @@
 import React from "react";
+import { EditText, EditTextarea } from 'react-edit-text';
 
 function TaskCard({
   task,
-  index,
   id,
   innerRef,
   draggableProps,
   dragHandleProps,
   deleteTaskHandler,
+  submitEditedTask,
   boardId,
   isDragging,
 }) {
@@ -19,21 +20,26 @@ function TaskCard({
       className={`group bg-white rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center
       `}
     >
-      <div className="flex items-center justify-between w-full gap-1 relative">
+      <div className="flex items-center justify-between w-full gap-2 relative pr-6">
         <input
           id="green-checkbox"
           type="checkbox"
           checked={boardId === "done" ? true : false}
-          className="w-4 accent-dark-pink outline-none h-4 rounded focus:ring-dark-red focus:ring-0"
+          className="w-4 accent-dark-pink outline-none h-4  rounded focus:ring-dark-red focus:ring-0"
         />
-        <label
-          htmlFor="green-checkbox"
-          className={`text-sm flex-1 font-medium ml-1 mr-6
-        ${boardId === "done" && "line-through"}
-        `}
-        >
-          {task.title}
-        </label>
+        <div className="flex-1">
+           <EditTextarea 
+              className={`text-sm flex-1 font-medium ml-0 scrollbar-hide text-edit 
+              ${boardId === "done" && "line-through"}
+              `}
+              style={{ width: 210 }}
+              rows={1}
+              inputClassName="text-sm flex-1 font-medium"
+              name="textbox2"
+              defaultValue={task.title}
+              onSave={(result) => submitEditedTask(id, result.value)}
+            />
+        </div>
         <button
           onClick={() => deleteTaskHandler(boardId, id)}
           className="absolute right-[1px] hidden group-hover:flex "

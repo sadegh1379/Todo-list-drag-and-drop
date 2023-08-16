@@ -15,6 +15,7 @@ function Column({
   deleteTaskHandler,
   addTaskHandler,
   addMultiTaskHandler,
+  editTaskHandler,
   boardId,
 }) {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -33,6 +34,10 @@ function Column({
   const submitMultiTask = (tasks) => {
     addMultiTaskHandler(boardId, tasks);
   };
+
+  const submitEditedTask = (taskId, newTitle) => {
+    editTaskHandler(boardId, taskId, newTitle)
+  }
 
   return (
     <Draggable draggableId={`${id}`} index={index}>
@@ -78,6 +83,7 @@ function Column({
                           dragHandleProps={provided.dragHandleProps}
                           boardId={boardId}
                           deleteTaskHandler={deleteTaskHandler}
+                          submitEditedTask={submitEditedTask}
                           isDragging={snapshot.isDragging}
                         />
                       )}
