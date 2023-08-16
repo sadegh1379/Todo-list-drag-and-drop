@@ -8,26 +8,37 @@ function TaskCard({
   draggableProps,
   dragHandleProps,
   deleteTaskHandler,
-  boardId
+  boardId,
+  isDragging,
 }) {
-
+  // console.log('isDraggign:', isDragging)
   return (
     <div
       {...draggableProps}
       {...dragHandleProps}
       ref={innerRef}
-      className="bg-white group rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center "
+      className={`group bg-white rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center
+      `}
     >
       <div className="flex items-center justify-between w-full gap-1 relative">
         <input
           id="green-checkbox"
           type="checkbox"
+          checked={boardId === "done" ? true : false}
           className="w-4 accent-dark-pink outline-none h-4 rounded focus:ring-dark-red focus:ring-0"
         />
-        <label htmlFor="green-checkbox" className="text-sm flex-1 font-medium ml-1 mr-6">
+        <label
+          htmlFor="green-checkbox"
+          className={`text-sm flex-1 font-medium ml-1 mr-6
+        ${boardId === "done" && "line-through"}
+        `}
+        >
           {task.title}
         </label>
-        <button onClick={() => deleteTaskHandler(boardId, id)} className="absolute right-[1px] hidden group-hover:flex ">
+        <button
+          onClick={() => deleteTaskHandler(boardId, id)}
+          className="absolute right-[1px] hidden group-hover:flex "
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.22.10",
+    "lodash": "^4.17.21",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",

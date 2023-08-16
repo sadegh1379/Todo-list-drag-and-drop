@@ -1,10 +1,19 @@
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { AiOutlinePlus } from 'react-icons/ai';
-
+import { AiOutlinePlus } from "react-icons/ai";
 import TaskCard from "../TaskCard";
 
-function Column({ id, tasks, index, title, bgColor, titleColor, icon, deleteTaskHandler, boardId }) {
+function Column({
+  id,
+  tasks,
+  index,
+  title,
+  bgColor,
+  titleColor,
+  icon,
+  deleteTaskHandler,
+  boardId,
+}) {
   return (
     <Draggable draggableId={`${id}`} index={index}>
       {(provided) => (
@@ -19,13 +28,15 @@ function Column({ id, tasks, index, title, bgColor, titleColor, icon, deleteTask
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`p-4 rounded-lg shadow-sm
+                className={`p-4 rounded-lg shadow-sm relative
               ${snapshot.isDraggingOver ? bgColor : bgColor}
 
               `}
               >
                 <h2 className="font-[600] text-[16px] flex justify-between">
-                  <span className={`${titleColor}`}>{title} {icon}</span>
+                  <span className={`${titleColor}`}>
+                    {title} {icon}
+                  </span>
                   <span className={`${titleColor} text-[13px] opacity-30`}>
                     {tasks.length} Tasks
                   </span>
@@ -37,7 +48,7 @@ function Column({ id, tasks, index, title, bgColor, titleColor, icon, deleteTask
                       draggableId={task.id}
                       index={index}
                     >
-                      {(provided) => (
+                      {(provided, snapshot) => (
                         <TaskCard
                           task={task}
                           index={index}
@@ -47,6 +58,7 @@ function Column({ id, tasks, index, title, bgColor, titleColor, icon, deleteTask
                           dragHandleProps={provided.dragHandleProps}
                           boardId={boardId}
                           deleteTaskHandler={deleteTaskHandler}
+                          isDragging={snapshot.isDragging}
                         />
                       )}
                     </Draggable>
@@ -54,12 +66,16 @@ function Column({ id, tasks, index, title, bgColor, titleColor, icon, deleteTask
                   {/* drag place holder */}
                   {provided.placeholder}
                   {/* add new task */}
-                  <div>
-                    <button className={`font-bold text-[13px] ${titleColor} opacity-60 flex items-center gap-2`}>
-                      <AiOutlinePlus size={20}/>
-                       New
-                    </button>
-                  </div>
+                  {boardId !== "done" && (
+                    <div>
+                      <button
+                        className={`font-bold text-[13px] ${titleColor} opacity-60 flex items-center gap-2`}
+                      >
+                        <AiOutlinePlus size={20} />
+                        New
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import Column from "../Column";
 import reorder, { reorderQuoteMap } from "../../helper/reorder";
-import { initialBoards } from "../../utils/Data";
 import useDeleteTask from "../../hooks/useDeleteTask";
+import { initialBoards } from "../../utils/Data";
+import Column from "../Column";
 
 function Board() {
   const [boards, setBoards] = useState(initialBoards);
@@ -49,7 +49,7 @@ function Board() {
   }
 
   return (
-    <DragDropContext onDragEnd={handleDropEnd}>
+    <DragDropContext onDragEnd={handleDropEnd} >
       <Droppable droppableId="board" direction="horizontal" type="COLUMN">
         {(provided) => (
           <div
