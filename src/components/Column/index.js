@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { AiOutlinePlus } from "react-icons/ai";
+import AddTaskForm from "../Forms/AddTaskForm";
 import TaskCard from "../TaskCard";
 
 function Column({
@@ -12,8 +13,27 @@ function Column({
   titleColor,
   icon,
   deleteTaskHandler,
+  addTaskHandler,
+  addMultiTaskHandler,
   boardId,
 }) {
+  const [showAddTask, setShowAddTask] = useState(false);
+  const [showTaskId, setShowTaskId] = useState("");
+
+  const showAddTaskHandelr = () => {
+    setShowAddTask(true);
+    setShowTaskId(boardId);
+  };
+
+  const submitTaskHandler = (title) => {
+    addTaskHandler(boardId, title);
+    setShowAddTask(false);
+  };
+
+  const submitMultiTask = (tasks) => {
+    addMultiTaskHandler(boardId, tasks);
+  };
+
   return (
     <Draggable draggableId={`${id}`} index={index}>
       {(provided) => (
@@ -66,15 +86,23 @@ function Column({
                   {/* drag place holder */}
                   {provided.placeholder}
                   {/* add new task */}
-                  {boardId !== "done" && (
+                  {boardId !== "done" && !showAddTask && (
                     <div>
                       <button
                         className={`font-bold text-[13px] ${titleColor} opacity-60 flex items-center gap-2`}
+                        onClick={showAddTaskHandelr}
                       >
                         <AiOutlinePlus size={20} />
                         New
                       </button>
                     </div>
+                  )}
+                  {showAddTask && showTaskId === boardId && (
+                    <AddTaskForm
+                      onSubmit={submitTaskHandler}
+                      onSubmitMulti={submitMultiTask}
+                      cancel={() => setShowAddTask(false)}
+                    />
                   )}
                 </div>
               </div>

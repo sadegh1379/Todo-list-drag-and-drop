@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import reorder, { reorderQuoteMap } from "../../helper/reorder";
-import useDeleteTask from "../../hooks/useDeleteTask";
+import reorder, { reorderQuoteMap } from "../../helpers/reorder";
+import useTaskHandler from "../../hooks/useTaskHandler";
 import { initialBoards } from "../../utils/Data";
 import Column from "../Column";
 
 function Board() {
   const [boards, setBoards] = useState(initialBoards);
   const [ordered, setOrdered] = useState(Object.keys(initialBoards));
-  const [deleteTask] = useDeleteTask();
+  const { deleteTask, addTask, addMultiTask } = useTaskHandler(boards);
 
   const handleDropEnd = (result) => {
     // dropped nowhere
@@ -45,7 +45,15 @@ function Board() {
   };
 
   const deleteTaskHandler = (boardId, taskId) => {
-    setBoards(deleteTask(boards, boardId, taskId))
+    setBoards(deleteTask(boardId, taskId))
+  }
+
+  const addTaskHandler = (boardId, title) => {
+    setBoards(addTask(boardId, title))
+  };
+
+  const addMultiTaskHandler = (boardId, tasks) =>{
+    setBoards(addMultiTask(boardId, tasks))
   }
 
   return (
@@ -69,6 +77,8 @@ function Board() {
                 tasks={boards[key].tasks}
                 icon={boards[key].icon}
                 deleteTaskHandler={deleteTaskHandler}
+                addTaskHandler={addTaskHandler}
+                addMultiTaskHandler={addMultiTaskHandler}
               />
             ))}
           </div>

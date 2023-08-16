@@ -11,7 +11,6 @@ function TaskCard({
   boardId,
   isDragging,
 }) {
-  // console.log('isDraggign:', isDragging)
   return (
     <div
       {...draggableProps}
