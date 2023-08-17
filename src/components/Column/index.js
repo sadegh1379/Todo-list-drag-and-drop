@@ -3,6 +3,20 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddTaskForm from "../Forms/AddTaskForm";
 import TaskCard from "../TaskCard";
+import { isEmpty } from "lodash";
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: "none",
+  padding: grid * 2,
+  margin: `0 0 ${grid}px 0`,
+
+  // change background colour if dragging
+  background: isDragging ? "lightgreen" : "grey",
+
+  // styles we need to apply on draggables
+  ...draggableStyle
+});
 
 function Column({
   id,
@@ -18,6 +32,7 @@ function Column({
   editTaskHandler,
   editTaskStatusHandler,
   boardId,
+  placeholderProps,
 }) {
   const [showAddTask, setShowAddTask] = useState(false);
   const [showTaskId, setShowTaskId] = useState("");
@@ -41,7 +56,7 @@ function Column({
   }
 
   return (
-    <Draggable draggableId={`${id}`} index={index}>
+    <Draggable isDragDisabled draggableId={`${id}`} index={index}>
       {(provided) => (
         <div
           {...provided.draggableProps}
@@ -91,6 +106,17 @@ function Column({
                   ))}
                   {/* drag place holder */}
                   {provided.placeholder}
+                  {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
+                    <div
+                      className="absolute border-dashed mx-4 rounded-[4px] border border-gray-100"
+                      style={{
+                        top:  placeholderProps.clientY + 50,
+                        left: placeholderProps.clientX,
+                        height: placeholderProps.clientHeight,
+                        width: placeholderProps.clientWidth,
+                      }}
+                    />
+                  )}
                   {/* add new task */}
                   {boardId !== "done" && !showAddTask && (
                     <div>
@@ -103,6 +129,7 @@ function Column({
                       </button>
                     </div>
                   )}
+                  {/* add task input form */}
                   {showAddTask && showTaskId === boardId && (
                     <AddTaskForm
                       onSubmit={submitTask}
