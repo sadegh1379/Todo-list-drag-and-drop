@@ -27,7 +27,7 @@ function TaskCard({
           type="checkbox"
           checked={task.toComplete}
           onChange={() => editTaskStatus(boardId, id)}
-          className="w-4 accent-dark-pink outline-none h-4  rounded focus:ring-dark-red focus:ring-0"
+          className="w-8 h-8 accent-dark-pink outline-none rounded focus:ring-dark-red focus:ring-0"
         />
         <div className="flex-1">
            <EditTextarea 
