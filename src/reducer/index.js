@@ -1,8 +1,15 @@
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
+const addToLocalStorage = (valueToStore) => {
+  window.localStorage.setItem('boards', JSON.stringify(valueToStore));
+};
+
 export const reducer = (state, action) => {
+  let newBoard = {};
   switch (action.type) {
     case "ADD_BOARD":
+      addToLocalStorage(action.boards);
       return action.boards;
 
     case "ADD_TASK":
@@ -12,14 +19,15 @@ export const reducer = (state, action) => {
         toComplete: false,
         title,
       };
-
-      return {
+      newBoard = {
         ...state,
         [boardId]: {
           ...state[boardId],
           tasks: state[boardId].tasks.concat([newTask]),
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
 
     case "ADD_MULTI_TASK":
       const newTasks = action.tasks.map((task) => ({
@@ -27,25 +35,29 @@ export const reducer = (state, action) => {
         toComplete: false,
         id: uuidv4(),
       }));
-      return {
+      newBoard = {
         ...state,
         [action.boardId]: {
           ...state[action.boardId],
           tasks: state[action.boardId].tasks.concat(newTasks),
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
 
     case "DELETE_TASK":
       const editedTasks = state[action.boardId].tasks.filter(
         (task) => task.id !== action.taskId
       );
-      return {
+      newBoard = {
         ...state,
         [action.boardId]: {
           ...state[action.boardId],
           tasks: editedTasks,
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
 
     case "EDIT_TASK":
       const editedTaskList = state[action.boardId].tasks.map((task) => {
@@ -57,13 +69,15 @@ export const reducer = (state, action) => {
         }
         return task;
       });
-      return {
+      newBoard = {
         ...state,
         [action.boardId]: {
           ...state[action.boardId],
           tasks: editedTaskList,
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
 
     case "EDIT_TASK_STATUS":
       const taskList = state[action.boardId].tasks.map((task) => {
@@ -75,20 +89,21 @@ export const reducer = (state, action) => {
         }
         return task;
       });
-      return {
+      newBoard = {
         ...state,
         [action.boardId]: {
           ...state[action.boardId],
           tasks: taskList,
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
 
     case "MOVE_TASK_TO_DONE":
       const task = state[action.boardId].tasks.find(
         (task) => task.id === action.taskId
       );
-
-      return {
+      newBoard = {
         ...state,
         [action.boardId]: {
           ...state[action.boardId],
@@ -101,12 +116,14 @@ export const reducer = (state, action) => {
           tasks: [task, ...state["done"].tasks],
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
     case "MOVE_TASK_TO_TODO":
       const taskItem = state[action.boardId].tasks.find(
         (task) => task.id === action.taskId
       );
 
-      return {
+      newBoard = {
         ...state,
         [action.boardId]: {
           ...state[action.boardId],
@@ -119,6 +136,8 @@ export const reducer = (state, action) => {
           tasks: [taskItem, ...state["todo"].tasks],
         },
       };
+      addToLocalStorage(newBoard);
+      return newBoard;
     default:
       return state;
   }

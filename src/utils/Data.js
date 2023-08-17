@@ -7,20 +7,20 @@ export const initialBoards = {
     icon: "",
     tasks: [
       {
-        id: "20",
+        id: "1",
         toComplete: false,
         title:
-          "1Start with meditation, exercise & breakfast for a productive day",
+          "Start with meditation, exercise & breakfast for a productive day",
       },
       {
-        id: "21",
+        id: "2",
         toComplete: false,
-        title: "2Read to learn something new every day",
+        title: "Read to learn something new every day",
       },
       {
-        id: "22",
+        id: "3",
         toComplete: false,
-        title: "3Read to learn something new every day",
+        title: "Learn something fresh & relevant",
       },
     ],
   },
@@ -32,20 +32,14 @@ export const initialBoards = {
     icon: "💪",
     tasks: [
       {
-        id: "23",
+        id: "4",
         toComplete: false,
-        title:
-          "4Start with meditation, exercise & breakfast for a productive day",
+        title: "Engage & question in meetings",
       },
       {
-        id: "24",
+        id: "5",
         toComplete: false,
-        title: "5Read to learn something new every day",
-      },
-      {
-        id: "25",
-        toComplete: false,
-        title: "6Read to learn something new every day",
+        title: "Use time-blocking for effective days",
       },
     ],
   },
@@ -57,20 +51,15 @@ export const initialBoards = {
     icon: "🎉",
     tasks: [
       {
-        id: "26",
+        id: "6",
+        toComplete: true,
+        title: "Finished online course - check!",
+      },
+      {
+        id: "7",
         toComplete: true,
         title:
-          "7Start with meditation, exercise & breakfast for a productive day",
-      },
-      {
-        id: "27",
-        toComplete: true,
-        title: "8Read to learn something new every day",
-      },
-      {
-        id: "28",
-        toComplete: true,
-        title: "9Read to learn something new every day",
+          "Congratulate yourself for incorporating healthier habits into your lifestyle, like regular exercise or mindful eating",
       },
     ],
   },

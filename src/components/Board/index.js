@@ -7,10 +7,14 @@ import Column from "../Column";
 import getTask from "../../helpers/getTask";
 import useDelay from "../../hooks/useDelay";
 
+const initialState = window.localStorage.getItem("boards")
+  ? JSON.parse(localStorage.getItem("boards"))
+  : initialBoards;
+
 function Board() {
-  const [boards, dispatch] = useReducer(reducer, initialBoards);
+  const [boards, dispatch] = useReducer(reducer, initialState);
   const [ordered, setOrdered] = useState(Object.keys(initialBoards));
-  const [delay] = useDelay(3000); // delay time
+  const [delay] = useDelay(3000); // delay time (ms)
 
   const handleDropEnd = (result) => {
     // dropped nowhere
@@ -87,7 +91,7 @@ function Board() {
       taskId,
       boardId,
     });
-   
+
     if (!getTask(boards, boardId, taskId)?.toComplete) {
       delay(() => {
         dispatch({

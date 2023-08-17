@@ -1,5 +1,5 @@
 import React from "react";
-import { EditText, EditTextarea } from 'react-edit-text';
+import { EditTextarea } from "react-edit-text";
 
 function TaskCard({
   task,
@@ -27,20 +27,20 @@ function TaskCard({
           type="checkbox"
           checked={task.toComplete}
           onChange={() => editTaskStatus(boardId, id)}
-          className="w-8 h-8 accent-dark-pink outline-none rounded focus:ring-dark-red focus:ring-0"
+          className="w-4 h-4 accent-dark-pink outline-none rounded focus:ring-dark-red focus:ring-0"
         />
         <div className="flex-1">
-           <EditTextarea 
-              className={`text-sm flex-1 font-medium ml-0 scrollbar-hide text-edit 
+          <EditTextarea
+            className={`text-sm flex-1 font-medium ml-0 scrollbar-hide text-edit 
               ${boardId === "done" && "line-through"}
               `}
-              style={{ width: 210 }}
-              rows={1}
-              inputClassName="text-sm flex-1 font-medium"
-              name="textbox2"
-              defaultValue={task.title}
-              onSave={(result) => submitEditedTask(id, result.value)}
-            />
+            style={{ width: "100%" }}
+            rows={1}
+            inputClassName="text-sm flex-1 font-medium"
+            name="textbox2"
+            defaultValue={task.title}
+            onSave={(result) => submitEditedTask(id, result.value)}
+          />
         </div>
         <button
           onClick={() => deleteTaskHandler(boardId, id)}
