@@ -1,24 +1,25 @@
 import React from "react";
 import { EditTextarea } from "react-edit-text";
+import { getTaskAnimationStyle } from "../../utils/getTaskAnimationStyle";
 
 function TaskCard({
   task,
   id,
-  innerRef,
-  draggableProps,
-  dragHandleProps,
   deleteTaskHandler,
   submitEditedTask,
   editTaskStatus,
   boardId,
-  isDragging,
+  provided,
+  snapshot,
 }) {
   return (
     <div
-      {...draggableProps}
-      {...dragHandleProps}
-      ref={innerRef}
-      className={`group bg-white rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center`}
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={provided.innerRef}
+      className={`group rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center
+      ${snapshot.isDragging ? "bg-white" : "bg-white"}`}
+      style={getTaskAnimationStyle(provided.draggableProps.style, snapshot)}
     >
       <div className="flex items-center justify-between w-full gap-2 relative pr-6">
         <input

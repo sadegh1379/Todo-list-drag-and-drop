@@ -79,14 +79,12 @@ function Column({
                           task={task}
                           index={index}
                           id={task.id}
-                          innerRef={provided.innerRef}
-                          draggableProps={provided.draggableProps}
-                          dragHandleProps={provided.dragHandleProps}
+                          provided={provided}
+                          snapshot={snapshot}
                           boardId={boardId}
                           deleteTaskHandler={deleteTaskHandler}
                           submitEditedTask={submitEditedTask}
                           editTaskStatus={editTaskStatusHandler}
-                          isDragging={snapshot.isDragging}
                         />
                       )}
                     </Draggable>
