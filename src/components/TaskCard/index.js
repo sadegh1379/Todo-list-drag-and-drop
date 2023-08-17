@@ -18,8 +18,7 @@ function TaskCard({
       {...draggableProps}
       {...dragHandleProps}
       ref={innerRef}
-      className={`group bg-white rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center
-      `}
+      className={`group bg-white rounded-[4px] border border-gray-100 p-4 m-0 flex flex-row items-center`}
     >
       <div className="flex items-center justify-between w-full gap-2 relative pr-6">
         <input
