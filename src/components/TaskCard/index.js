@@ -9,6 +9,7 @@ function TaskCard({
   dragHandleProps,
   deleteTaskHandler,
   submitEditedTask,
+  editTaskStatus,
   boardId,
   isDragging,
 }) {
@@ -24,7 +25,8 @@ function TaskCard({
         <input
           id="green-checkbox"
           type="checkbox"
-          checked={boardId === "done" ? true : false}
+          checked={task.toComplete}
+          onChange={() => editTaskStatus(boardId, id)}
           className="w-4 accent-dark-pink outline-none h-4  rounded focus:ring-dark-red focus:ring-0"
         />
         <div className="flex-1">

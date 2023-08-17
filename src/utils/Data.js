@@ -8,15 +8,18 @@ export const initialBoards = {
     tasks: [
       {
         id: "20",
+        toComplete: false,
         title:
           "1Start with meditation, exercise & breakfast for a productive day",
       },
       {
         id: "21",
+        toComplete: false,
         title: "2Read to learn something new every day",
       },
       {
         id: "22",
+        toComplete: false,
         title: "3Read to learn something new every day",
       },
     ],
@@ -30,15 +33,18 @@ export const initialBoards = {
     tasks: [
       {
         id: "23",
+        toComplete: false,
         title:
           "4Start with meditation, exercise & breakfast for a productive day",
       },
       {
         id: "24",
+        toComplete: false,
         title: "5Read to learn something new every day",
       },
       {
         id: "25",
+        toComplete: false,
         title: "6Read to learn something new every day",
       },
     ],
@@ -52,15 +58,18 @@ export const initialBoards = {
     tasks: [
       {
         id: "26",
+        toComplete: true,
         title:
           "7Start with meditation, exercise & breakfast for a productive day",
       },
       {
         id: "27",
+        toComplete: true,
         title: "8Read to learn something new every day",
       },
       {
         id: "28",
+        toComplete: true,
         title: "9Read to learn something new every day",
       },
     ],

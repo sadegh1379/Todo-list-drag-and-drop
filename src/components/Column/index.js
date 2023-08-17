@@ -16,6 +16,7 @@ function Column({
   addTaskHandler,
   addMultiTaskHandler,
   editTaskHandler,
+  editTaskStatusHandler,
   boardId,
 }) {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -84,6 +85,7 @@ function Column({
                           boardId={boardId}
                           deleteTaskHandler={deleteTaskHandler}
                           submitEditedTask={submitEditedTask}
+                          editTaskStatus={editTaskStatusHandler}
                           isDragging={snapshot.isDragging}
                         />
                       )}

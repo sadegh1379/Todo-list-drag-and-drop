@@ -4,10 +4,13 @@ import reorder, { reorderQuoteMap } from "../../helpers/reorder";
 import { reducer } from "../../reducer";
 import { initialBoards } from "../../utils/Data";
 import Column from "../Column";
+import getTask from "../../helpers/getTask";
+import useDelay from "../../hooks/useDelay";
 
 function Board() {
   const [boards, dispatch] = useReducer(reducer, initialBoards);
   const [ordered, setOrdered] = useState(Object.keys(initialBoards));
+  const [delay] = useDelay(3000); // delay time
 
   const handleDropEnd = (result) => {
     // dropped nowhere
@@ -40,46 +43,72 @@ function Board() {
       destination,
     });
     dispatch({
-      type: 'ADD_BOARD',
-      boards: data.quoteMap
-    })
+      type: "ADD_BOARD",
+      boards: data.quoteMap,
+    });
   };
 
   const deleteTaskHandler = (boardId, taskId) => {
     dispatch({
-      type: 'DELETE_TASK',
+      type: "DELETE_TASK",
       taskId,
-      boardId
-    })
-  }
+      boardId,
+    });
+  };
 
   const addTaskHandler = (boardId, title) => {
     dispatch({
-      type: 'ADD_TASK',
+      type: "ADD_TASK",
       title,
-      boardId
-    })
+      boardId,
+    });
   };
 
-  const addMultiTaskHandler = (boardId, tasks) =>{
+  const addMultiTaskHandler = (boardId, tasks) => {
     dispatch({
-      type: 'ADD_MULTI_TASK',
+      type: "ADD_MULTI_TASK",
       tasks,
-      boardId
-    })
-  }
+      boardId,
+    });
+  };
 
   const editTaskHandler = (boardId, taskId, newTitle) => {
     dispatch({
-      type: 'EDIT_TASK',
+      type: "EDIT_TASK",
       taskId,
       boardId,
       newTitle,
-    })
-  }
+    });
+  };
+
+  const editTaskStatusHandler = (boardId, taskId) => {
+    dispatch({
+      type: "EDIT_TASK_STATUS",
+      taskId,
+      boardId,
+    });
+   
+    if (!getTask(boards, boardId, taskId)?.toComplete) {
+      delay(() => {
+        dispatch({
+          type: "MOVE_TASK_TO_DONE",
+          taskId,
+          boardId,
+        });
+      });
+    } else {
+      delay(() => {
+        dispatch({
+          type: "MOVE_TASK_TO_TODO",
+          taskId,
+          boardId,
+        });
+      });
+    }
+  };
 
   return (
-    <DragDropContext onDragEnd={handleDropEnd} >
+    <DragDropContext onDragEnd={handleDropEnd}>
       <Droppable droppableId="board" direction="horizontal" type="COLUMN">
         {(provided) => (
           <div
@@ -102,6 +131,7 @@ function Board() {
                 addTaskHandler={addTaskHandler}
                 addMultiTaskHandler={addMultiTaskHandler}
                 editTaskHandler={editTaskHandler}
+                editTaskStatusHandler={editTaskStatusHandler}
               />
             ))}
           </div>

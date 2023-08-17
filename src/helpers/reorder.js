@@ -12,8 +12,17 @@ export default reorder;
 export const reorderQuoteMap = ({ quoteMap, source, destination }) => {
   const current = [...quoteMap[source.droppableId].tasks];
   const next = [...quoteMap[destination.droppableId].tasks];
-  const target = current[source.index];
-
+  // change task status
+  const target =
+    destination.droppableId === "done"
+      ? {
+          ...current[source.index],
+          toComplete: true,
+        }
+      : {
+          ...current[source.index],
+          toComplete: false,
+        };
   // moving to same list
   if (source.droppableId === destination.droppableId) {
     const reordered = reorder(current, source.index, destination.index);
