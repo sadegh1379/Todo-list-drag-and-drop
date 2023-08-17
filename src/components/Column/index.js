@@ -26,7 +26,7 @@ function Column({
     setShowTaskId(boardId);
   };
 
-  const submitTaskHandler = (title) => {
+  const submitTask = (title) => {
     addTaskHandler(boardId, title);
     setShowAddTask(false);
   };
@@ -105,7 +105,7 @@ function Column({
                   )}
                   {showAddTask && showTaskId === boardId && (
                     <AddTaskForm
-                      onSubmit={submitTaskHandler}
+                      onSubmit={submitTask}
                       onSubmitMulti={submitMultiTask}
                       cancel={() => setShowAddTask(false)}
                     />
