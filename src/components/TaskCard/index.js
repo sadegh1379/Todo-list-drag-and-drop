@@ -1,4 +1,6 @@
 import React from "react";
+import * as Icon from "react-icons/fi";
+import Checkbox from "react-custom-checkbox";
 import { EditTextarea } from "react-edit-text";
 import { getTaskAnimationStyle } from "../../utils/getTaskAnimationStyle";
 
@@ -22,12 +24,13 @@ function TaskCard({
       style={getTaskAnimationStyle(provided.draggableProps.style, snapshot)}
     >
       <div className="flex items-center justify-between w-full gap-2 relative pr-6">
-        <input
-          id="green-checkbox"
-          type="checkbox"
+        {/* custom checkbox */}
+        <Checkbox
+          icon={<Icon.FiCheck color="#1B5E20" size={14} />}
           checked={task.toComplete}
           onChange={() => editTaskStatus(boardId, id)}
-          className="w-4 h-4 accent-dark-pink outline-none rounded focus:ring-dark-red focus:ring-0"
+          borderColor="#C8E6C9"
+          style={{ cursor: "pointer", borderRadius: 0 }}
         />
         <div className="flex-1">
           <EditTextarea
