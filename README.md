@@ -4,11 +4,11 @@
 # Todo List
 
 ### Using Custom Webpack
-
+**Give it a ⭐ if you liked it 😜**
 # demo
 see demo [here](https://todo-list-drag-and-drop.vercel.app/)
 
-**Give it a ⭐ if you liked it 😜**
+
 
 ## install
 
@@ -26,3 +26,13 @@ npm start
 
 - react
 - tailwindcss
+
+## Features
+
+- Add Todo
+- Remove Todo
+- Edit todo bg click
+- Drag and Drop todo
+- Add multi line task 
+- Auto save to local storage
+- Each line is considered as a todo
